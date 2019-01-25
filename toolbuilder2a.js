@@ -249,18 +249,5 @@ function f(para) {
 }
 
 function inc(fn, ol) {
-    var fn = "";
-    var h = document.getElementsByTagName("head")[0];
-    var s = document.createElement("script");
-    s.src = fn;
-    s.type = "text/javascript";
-    s.onload = s.onreadystatechange = function() {
-        if (s.readyState) {
-            if (s.readyState === "complete" || s.readyState === "loaded") {
-                s.onreadystatechange = null;
-                ol()
-            }
-        } else ol()
-    };
-    h.appendChild(s)
+    ol();
 };

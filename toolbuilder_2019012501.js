@@ -90,6 +90,15 @@ function drawOutput(data, mode) {
             var temp_d = "";
             for (d = 0; d < data.getNumberOfColumns(); d++) {
                 value = data.getValue(i, d);
+                
+                //Highlighting
+                var s = $("[data-tranxid='txtInput']").val();
+                altExps = [(s.charAt(0).toUpperCase() + s.slice(1)),(s.charAt(0).toLowerCase() + s.slice(1))];
+                for(var h=0;h<altExps.length;h++){
+                    value = value.split(altExps[h]).join("<span style='background-color:yellow'>"+altExps[h]+"</span>");
+                }
+                
+                
                 if (value !== "null")
                     if (value.indexOf("func:") === 0) temp_d = temp_d + "<td>" + drawMultimedia(value) + "</td>";
                     else temp_d = temp_d + "<td>" + value + "</td>"
@@ -126,6 +135,7 @@ function drawOutput(data, mode) {
             }
             temp_i = temp_i + temp_j + "<br/>"
         }
+    
     
     
     
@@ -227,11 +237,6 @@ function f(para) {
                         })
                     } else {
                         var output_withHighlighting = drawOutput(data, main.output_mode);
-                        var s = $("[data-tranxid='txtInput']").val();
-                        altExps = [(s.charAt(0).toUpperCase() + string.slice(1)),(s.charAt(0).toLowerCase() + string.slice(1))];
-                        for(var i=0;i<altExps.length;i++){
-                            output_withHighlighting = output_withHighlighting.split(altExps[i]).join("<span style='background-color:yellow'>"+altExps[i]+"</span>");
-                        }
                         $("[data-tranxid='divOutput']").html(output_withHighlighting);
                     }
                 }

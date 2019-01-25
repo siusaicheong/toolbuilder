@@ -126,6 +126,9 @@ function drawOutput(data, mode) {
             }
             temp_i = temp_i + temp_j + "<br/>"
         }
+    
+    
+    
     return temp_i
 }
 
@@ -222,7 +225,15 @@ function f(para) {
                         output.draw(data, {
                             showRowNumber: true
                         })
-                    } else $("[data-tranxid='divOutput']").html(drawOutput(data, main.output_mode))
+                    } else {
+                        var output_withHighlighting = drawOutput(data, main.output_mode);
+                        var s = $("[data-tranxid='txtInput']").val();
+                        altExps = [(s.charAt(0).toUpperCase() + string.slice(1)),(s.charAt(0).toLowerCase() + string.slice(1))];
+                        for(var i=0;i<altExps.length;i++){
+                            output_withHighlighting = output_withHighlighting.split(altExps[i]).join("<span style='background-color:yellow'>"+altExps[i]+"</span>");
+                        }
+                        $("[data-tranxid='divOutput']").html(output_withHighlighting);
+                    }
                 }
             };
             setup = function() {
